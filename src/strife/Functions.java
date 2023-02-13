@@ -25,6 +25,10 @@ public class Functions {
         this.size = size;
     }
 
+    Functions() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
     /**
      * A method that will get the group of cards as an ArrayList
      *
@@ -35,7 +39,7 @@ public class Functions {
     }
 
     public void shuffle() {
-        Collections.shuffle(cards);
+          Collections.shuffle(cards);
     }
 
     /**
