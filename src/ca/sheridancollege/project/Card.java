@@ -1,34 +1,29 @@
 package ca.sheridancollege.project;
 
-public class Card {
 
-    Card() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
-  public enum color {
-        RED, BLACK
-    }
+/**
+ * A class to represent a single playing card.
+ */
 
-    public enum rank {
-        ACE, TWO, THREE, FOUR, FIVE, SIX, SEVEN, EIGHT, NINE, TEN, Jack, Queen, King
-    }
-    
-    private final color color;
-    private final rank rank;
+public abstract class Card {
+    private String color;
+    private String rank;
 
-    public Card(color color, rank rank) {
+    public Card(String color, String rank) {
         this.color = color;
         this.rank = rank;
     }
 
-    public rank getrank() {
-        return this.rank;
+    public String getColor() {
+        return color;
     }
 
-    public color getColor() {
-        return this.color;
+    public String getRank() {
+        return rank;
+    }
+
+    public int getPointValue() {
+        // TODO: Implement the logic for determining the point value of a card based on its rank
+        return 0;
     }
 }
-
-  
-

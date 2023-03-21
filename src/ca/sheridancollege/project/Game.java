@@ -6,53 +6,58 @@
 package ca.sheridancollege.project;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * The class that models your game. You should create a more specific child of this class and instantiate the methods
  * given.
  *
- * @author dancye
- * @author Paul Bonenfant Jan 2020
+ * @author aum
+ * @author Paul Bonenfant March 
  */
-public abstract class Game {
 
-    private final String name;//the title of the game
-    private ArrayList<Player> players;// the players of the game
+public class Game {
+    private List<Player> players;
+    private Deck deck;
+    private int rounds;
+    private int turnsPerRound;
+    private int currentRound;
+    private Player currentPlayer;
+    private Player otherPlayer;
 
-    public Game(String name) {
-        this.name = name;
-        players = new ArrayList();
+    public Game() {
+        // Constructor code
     }
 
-    /**
-     * @return the name
-     */
-    public String getName() {
-        return name;
+    public void startNewGame() {
+        // Method code
     }
 
-    /**
-     * @return the players of this game
-     */
-    public ArrayList<Player> getPlayers() {
-        return players;
+    public void playRound() {
+        // Method code
     }
 
-    /**
-     * @param players the players of this game
-     */
-    public void setPlayers(ArrayList<Player> players) {
-        this.players = players;
+    public Player determineWinner() {
+        // Method code
+        return null;
+        // Method code
     }
 
-    /**
-     * Play the game. This might be one method or many method calls depending on your game.
-     */
-    public abstract void play();
+    public Player getCurrentPlayer() {
+        // Method code
+        return null;
+        // Method code
+    }
 
-    /**
-     * When the game is over, use this method to declare and display a winning player.
-     */
-    public abstract void declareWinner();
+    public int getCurrentRound() {
+        // Method code
+        return 0;
+        // Method code
+    }
 
-}//end class
+    public int getCurrentTurn() {
+        // Method code
+        return 0;
+        // Method code
+    }
+}
