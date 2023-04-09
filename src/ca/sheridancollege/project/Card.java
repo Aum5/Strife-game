@@ -5,25 +5,26 @@ package ca.sheridancollege.project;
  * A class to represent a single playing card.
  */
 
-public abstract class Card {
-    private String color;
-    private String rank;
+public class Card {
+private String color;
+private String rank;
+private int point;
 
-    public Card(String color, String rank) {
+    public Card(String color, String rank, int point) {
         this.color = color;
         this.rank = rank;
+        this.point = point;
     }
-
+    
     public String getColor() {
-        return color;
+        return this.color;
     }
-
+    
     public String getRank() {
-        return rank;
+        return this.rank;
     }
-
+    
     public int getPointValue() {
-        // TODO: Implement the logic for determining the point value of a card based on its rank
-        return 0;
+        return this.point;
     }
-}
+}   
