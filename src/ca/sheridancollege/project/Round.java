@@ -28,6 +28,29 @@ public class Round extends Game {
     }
 
     @Override
+    public void startGame() {
+        deck.shuffle();
+
+        for (int i = 0; i < 10; i++) {
+            for (Player player : players) {
+                Card card = deck.drawCard();
+                player.addCardToHand(card);
+            }
+        }
+    }
+
+    @Override
+    public void setRounds() {
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.print("Enter the total number of rounds: ");
+        int numRounds = scanner.nextInt();
+        scanner.nextLine(); // consume the newline character
+
+        this.rounds = numRounds;
+    }
+
+    @Override
     public void addPlayers() {
         Scanner scanner = new Scanner(System.in);
 
@@ -125,7 +148,7 @@ public class Round extends Game {
     public void evaluateTurn(List<Player> players, List<Card> turnCards) {
         Card c1 = turnCards.get(0);
         Card c2 = turnCards.get(1);
-
+    
         if (c1.getColor() == c2.getColor()) {
             if (c1.getPointValue() > c2.getPointValue()) {
                 players.get(0).addPoints();
@@ -133,19 +156,20 @@ public class Round extends Game {
                 players.get(1).addPoints();
             }
         } else {
-            if (c1.getColor() == "Black") {
+            if (c1.getColor().equals("Black")) {
                 players.get(0).addPoints();
-            } else if (c2.getColor() == "Black") {
+            } else if (c2.getColor().equals("Black")) {
                 players.get(1).addPoints();
             }
         }
-
+    
         for (Player player : players) {
             System.out.println(player.getName() + " scores " + player.getPoints() + " points");
         }
-
+    
         turnCards.clear();
     }
+    
     
     public List<Player> getPlayers() {
         return players;

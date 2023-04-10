@@ -24,7 +24,7 @@ public class Main {
         round.setRounds();
         round.addPlayers();
         round.startGame();
-        round.showHands(round.getPlayers().get(0)); // pass in the first player in the list
+        round.showHands(round.getPlayers().get(0));
         round.playRound();
     }
 }
