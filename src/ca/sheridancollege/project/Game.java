@@ -40,7 +40,8 @@ public class Game {
             boolean validRoundNumber;
                 
             do {
-            System.out.print("Enter the total number of rounds (1-10): ");
+            System.out.println("*Rounds must be between 1 and 10.");
+            System.out.print("Enter the total number of rounds: ");
                 numRounds = scanner.nextInt();
                 validRoundNumber = checkRoundNumber(numRounds);
                 if (!validRoundNumber) {
@@ -66,6 +67,7 @@ public class Game {
             boolean isUnique = false;
             
             while (!isUnique) {
+                System.out.println("*Player Name must be different");
                 System.out.print("Enter the name of player " + i + ": ");
                 name = scanner.nextLine();
             
