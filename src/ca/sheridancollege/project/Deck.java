@@ -1,8 +1,3 @@
-/**
- * SYST 17796 Project Base code.
- * Students can modify and extend to implement their game.
- * Add your name as an author and the date!
- */
 package ca.sheridancollege.project;
 
 import java.util.ArrayList;
@@ -10,25 +5,48 @@ import java.util.Collections;
 import java.util.List;
 
 public class Deck {
-
     private List<Card> cards;
     private int currentCardIndex;
 
-    public Deck() {
-        cards = new ArrayList<>();
-        currentCardIndex = 0;
-        initializeDeck();
+    public enum Color {
+        BLACK,
+        RED
     }
 
-    private void initializeDeck() {
-        String[] colors = {"Black", "Red"};
-        String[] ranks = {"Ace", "2", "3", "4", "5", "6", "7", "8", "9", "10", "Jack", "Queen", "King"};
-        int[] points = {14, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13};
+    public enum Rank {
+        ACE(14),
+        TWO(2),
+        THREE(3),
+        FOUR(4),
+        FIVE(5),
+        SIX(6),
+        SEVEN(7),
+        EIGHT(8),
+        NINE(9),
+        TEN(10),
+        JACK(11),
+        QUEEN(12),
+        KING(13);
 
-        for (int i = 0; i < ranks.length; i++) {
-            for (String color : colors) {
-                Card card = new Card(color, ranks[i], points[i]);
-                cards.add(card);
+        private final int points;
+
+        Rank(int points) {
+            this.points = points;
+        }
+
+        public int getPoints() {
+            return points;
+        }
+    }
+
+    public Deck() {
+        cards = new ArrayList<>();
+        this.currentCardIndex = 0;
+
+        for (Rank rank : Rank.values()) {
+            for (Color color : Color.values()) {
+                cards.add(new Card(color, rank));
+
             }
         }
     }
@@ -42,17 +60,12 @@ public class Deck {
     }
 
     public Card drawCard() {
-        if (currentCardIndex >= cards.size()) {
-            throw new RuntimeException("Deck is empty");
-        }
-
         Card card = cards.get(currentCardIndex);
         currentCardIndex++;
         return card;
     }
 
     public void returnCardToDeck(Card card) {
-        cards.add(card);
+        // method to return a card to the deck
     }
-
 }
