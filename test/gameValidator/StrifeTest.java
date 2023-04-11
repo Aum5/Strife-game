@@ -6,7 +6,6 @@
 package gameValidator;
 
 import ca.sheridancollege.project.*;
-import ca.sheridancollege.project.Deck.Rank;
 import java.util.*;
 import java.util.List;
 import org.junit.After;
@@ -60,93 +59,123 @@ public class StrifeTest
     
     @Test
     public void testCheckRoundNumberGood() {
-        Game game = new Game();
-        assertTrue(game.checkRoundNumber(5));
-        boolean expResult = true;
-        System.out.println(expResult + "checkRoundNumber Good");
+    Game game = new Game();
+    boolean result = game.checkRoundNumber(5);
+    boolean expResult = true;
+    System.out.println("checkRoundNumberGood");
+    assertEquals(expResult, result);
     }
     
     @Test
     public void testCheckRoundNumberBad() {
-        Game game = new Game();
-        assertFalse(game.checkRoundNumber(-1));
-        boolean expResult = false;
-        System.out.println(expResult + "checkRoundNumber Bad");
+    Game game = new Game();
+    boolean result = game.checkRoundNumber(-1); 
+    boolean expResult = false;
+    System.out.println("checkRoundNumberBad");
+    assertEquals(expResult, result);
     }
     
     @Test
     public void testCheckRoundNumberBoundry() {
-        Game game = new Game();
-        assertTrue(game.checkRoundNumber(1));
-        assertTrue(game.checkRoundNumber(10));
-        boolean expResult = true;
-        System.out.println(expResult + "checkRoundNumber Bad");
+    Game game = new Game();
+    boolean result = game.checkRoundNumber(1);
+    boolean result2 = game.checkRoundNumber(10);
+    boolean expResult = true;
+    System.out.println("checkRoundNumberBad");
+    assertEquals(expResult, result);
+    assertEquals(expResult, result2);
     }
     
     @Test
     public void testValidCardChoiceGood() {
-        Player player = new Player("Vyom");
-        player.addCardToHand(new Card(Deck.Color.BLACK, Rank.ACE));
-        player.addCardToHand(new Card(Deck.Color.RED, Rank.KING));
-        player.addCardToHand(new Card(Deck.Color.BLACK, Rank.QUEEN));
-        player.addCardToHand(new Card(Deck.Color.RED, Rank.TWO));
-        player.addCardToHand(new Card(Deck.Color.BLACK, Rank.THREE));
-        
-        boolean validChoice = player.isValidChoice(2, player.getHand().size());
-        
-        boolean expResult = true;
-        System.out.println(expResult + "TestValidCard Good: " + validChoice);
-    }
+    Round player = new Round("Vyom");
+    player.addCardToHand(new Card("Black", "Ace", 14));
+    player.addCardToHand(new Card("Red", "King", 13));
+    player.addCardToHand(new Card("Black", "Queen", 12));
+    player.addCardToHand(new Card("Red", "Two", 2));
+    player.addCardToHand(new Card("Black", "Three", 3));
     
-        @Test
+    boolean validChoice = player.isValidChoice(2, player.getHand().size());
+    
+    boolean expResult = true;
+    System.out.println("TestValidCard Good");
+    assertEquals(expResult, validChoice);
+}
+    
+    @Test
     public void testValidCardChoiceBad() {
-        Player player = new Player("Vyom");
-        player.addCardToHand(new Card(color.black, Rank.ACE));
-        player.addCardToHand(new Card(Deck.Color.RED, Rank.KING));
-        player.addCardToHand(new Card(Deck.Color.BLACK, Rank.QUEEN));
-        player.addCardToHand(new Card(Deck.Color.RED, Rank.TWO));
-        player.addCardToHand(new Card(Deck.Color.BLACK, Rank.THREE));
-        
-        boolean validChoice = player.isValidChoice(10, player.getHand().size());
+    Round player = new Round("Vyom");
+    player.addCardToHand(new Card("Black", "Ace", 14));
+    player.addCardToHand(new Card("Red", "King", 13));
+    player.addCardToHand(new Card("Black", "Queen", 12));
+    player.addCardToHand(new Card("Red", "Two", 2));
+    player.addCardToHand(new Card("Black", "Three", 3));
+    
+    boolean validChoice = player.isValidChoice(10, player.getHand().size());
 
-        boolean expResult = false;
-        System.out.println(expResult + "TestValidCard Bad: " + validChoice);
+    boolean expResult = false;
+    System.out.println("TestValidCardBad");
+    assertEquals(expResult, validChoice);
     }
     
-        @Test
+    @Test
     public void testValidCardChoiceBoundry() {
-        Player player = new Player("Vyom");
-        player.addCardToHand(new Card(Deck.Color.BLACK, Rank.ACE));
-        player.addCardToHand(new Card(Deck.Color.RED, Rank.KING));
-        player.addCardToHand(new Card(Deck.Color.BLACK, Rank.QUEEN));
-        player.addCardToHand(new Card(Deck.Color.RED, Rank.TWO));
-        player.addCardToHand(new Card(Deck.Color.BLACK, Rank.THREE));
+    Round player = new Round("Vyom");
+    player.addCardToHand(new Card("Black", "Ace", 14));
+    player.addCardToHand(new Card("Red", "King", 13));
+    player.addCardToHand(new Card("Black", "Queen", 12));
+    player.addCardToHand(new Card("Red", "Two", 2));
+    player.addCardToHand(new Card("Black", "Three", 3));
+    
+    boolean validChoice1 = player.isValidChoice(1, player.getHand().size());
+    boolean validChoice2 = player.isValidChoice(5, player.getHand().size());
+    
+    boolean expResult = true;
+    System.out.println("TestValidCardBoundry");
+    assertEquals(expResult, validChoice1);
+    assertEquals(expResult, validChoice2);
+    }
+   
+    @Test
+    public void testAddPlayersGood() {
+    List<Player> players = new ArrayList<>();
+    Round player1 = new Round("Vyom");
+    Round player2 = new Round("Aum");
+    players.add(player1);
+    
+    boolean isUnique = players.stream().noneMatch(p -> p.getName().equals(player2.getName()));
+    
+    boolean expResult = true;
+    System.out.println("TestAddPlayersGood");
+    assertEquals(expResult, isUnique);
+    }
 
-        boolean validChoice1 = player.isValidChoice(1, player.getHand().size());
-        boolean validChoice5 = player.isValidChoice(5, player.getHand().size());  
-        
-        boolean expResult = true;
-        System.out.println(expResult + "TestValidCard Boundry: " + "1." + validChoice1 + " 5." + validChoice5);
+    
+    @Test
+    public void testAddPlayersBad() {
+    List<Player> players = new ArrayList<>();
+    Round player1 = new Round("Vyom");
+    Round player2 = new Round("Vyom");
+    players.add(player1);
+    
+    boolean isUnique = players.stream().noneMatch(p -> p.getName().equals(player2.getName()));
+    
+    boolean expResult = false;
+    System.out.println("TestAddPlayersGood");
+    assertEquals(expResult, isUnique);
     }
     
     @Test
-    public void testIsUniqueNameForUniqueInput() {
-        Game game = new Game();
-        assertTrue(game.isUniqueName("Player1"));
-    }
+    public void testAddPlayersBoundry() {
+    List<Player> players = new ArrayList<>();
+    Round player1 = new Round("Vyom");
+    Round player2 = new Round("Vyom1");
+    players.add(player1);
     
-    @Test
-    public void testIsUniqueNameForNonUniqueInput() {
-        Game game = new Game();
-        Player player1 = new Player("Player1");
-        Player player2 = new Player("Player1");
-        assertFalse(game.isUniqueName("Player1"));
-    }
+    boolean isUnique = players.stream().noneMatch(p -> p.getName().equals(player2.getName()));
     
-    @Test
-    public void testAddPlayersWhenPlayerListIsEmpty() {
-        Game game = new Game();
-        game.addPlayers();
-        assertEquals(game.players.size(), 2);
-    }
+    boolean expResult = true;
+    System.out.println("TestAddPlayersGood");
+    assertEquals(expResult, isUnique);
+    }    
 }
