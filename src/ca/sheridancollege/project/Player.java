@@ -4,7 +4,7 @@ import java.util.List;
 
 public abstract class Player {
     private String name;
-    protected List<Card> hand;
+    List<Card> hand;
     private int points;
 
     public Player(String name) {

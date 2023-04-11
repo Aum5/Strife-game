@@ -101,7 +101,7 @@ public class StrifeTest
         @Test
     public void testValidCardChoiceBad() {
         Player player = new Player("Vyom");
-        player.addCardToHand(new Card(Deck.Color.BLACK, Rank.ACE));
+        player.addCardToHand(new Card(color.black, Rank.ACE));
         player.addCardToHand(new Card(Deck.Color.RED, Rank.KING));
         player.addCardToHand(new Card(Deck.Color.BLACK, Rank.QUEEN));
         player.addCardToHand(new Card(Deck.Color.RED, Rank.TWO));

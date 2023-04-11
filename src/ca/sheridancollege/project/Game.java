@@ -18,7 +18,7 @@ import java.util.Scanner;
  */
 
 public class Game {
-        private List<Player> players;
+    private List<Player> players;
     private Deck deck;
     private int rounds;
     private int turns = 5;
@@ -26,7 +26,7 @@ public class Game {
     private int currentRound = 1;
     private Player attribute;
     private Player otherPlayer;
-	private Player currentPlayer;
+    private Player currentPlayer;
     private List<Card> turnCards = new ArrayList<>(2);
 
     public Game() {
@@ -34,41 +34,61 @@ public class Game {
         this.deck = new Deck();
     }
 
-    public void setRounds() {
-        Scanner scanner = new Scanner(System.in);
-        int numRounds;
-        boolean validRoundNumber;
-        
-        do {
+        public void setRounds() {
+            Scanner scanner = new Scanner(System.in);
+            int numRounds;
+            boolean validRoundNumber;
+                
+            do {
             System.out.print("Enter the total number of rounds (1-10): ");
-            numRounds = scanner.nextInt();
-            validRoundNumber = checkRoundNumber(numRounds);
-            if (!validRoundNumber) {
-                System.out.println("Invalid number of rounds. Please enter a number between 1 and 10.");
-            }
-        } while (!validRoundNumber);
+                numRounds = scanner.nextInt();
+                validRoundNumber = checkRoundNumber(numRounds);
+                if (!validRoundNumber) {
+                    System.out.println("Invalid number of rounds. Please enter a number between 1 and 10.");
+                }
+            } while (!validRoundNumber);
+                
+            this.rounds = numRounds;
+        }
+            
+        public boolean checkRoundNumber(int numRounds) {
+            return numRounds >= 1 && numRounds <= 10;
+        }
+    
         
-        this.rounds = numRounds;
-    }
-    
-    public boolean checkRoundNumber(int numRounds) {
-        return numRounds >= 1 && numRounds <= 10;
-    }
-    
     public void addPlayers() {
         Scanner scanner = new Scanner(System.in);
-
 
         int numPlayers = 2;
 
         for (int i = 1; i <= numPlayers; i++) {
-            System.out.print("Enter the name of player " + i + ": ");
-            String name = scanner.nextLine();
-            Player player = new Round(name);
-            players.add(player);
-
+            String name;
+            boolean isUnique = false;
+            
+            while (!isUnique) {
+                System.out.print("Enter the name of player " + i + ": ");
+                name = scanner.nextLine();
+            
+                if (isNameUnique(name)) {
+                    Player player = new Round(name);
+                    players.add(player);
+                    isUnique = true;
+                } else {
+                    System.out.println("That name is already taken. Please enter a different name.");
+                }
+            }
         }
     }
+
+    private boolean isNameUnique(String name) {
+    for (Player player : players) {
+        if (player.getName().equals(name)) {
+            return false;
+        }
+    }
+    return true;
+    }
+
 
     public void startGame() {
         Deck deck = new Deck();
@@ -151,8 +171,8 @@ public class Game {
 
         Card c1 = turnCards.get(0);
         Card c2 = turnCards.get(1);
-    
-        if(c1.getColor().equals(c2.getColor())){
+
+        if(c1.getColor() == c2.getColor()){
             if(c1.getPointValue() > c2.getPointValue() ){
                 players.get(0).addPoints();
             }else{
@@ -160,17 +180,14 @@ public class Game {
             }
         }
         else{
-            if(c1.getColor().equals("BLACK")){
+            if(c1.getColor() == "Black"){
                 players.get(0).addPoints();
             }
-            else if (c2.getColor().equals("BLACK")){
+            else if (c2.getColor() == "Black"){
                 players.get(1).addPoints();
             }
         }
-        turnCards.clear();
-        deck.returnCardToDeck(c1);
-        deck.returnCardToDeck(c2);
-        deck.shuffle();
+
     }
 
    
